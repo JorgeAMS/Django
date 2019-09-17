@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path               # we added include import
 
 urlpatterns = [
-    path('', include('polls.urls')),  
+    path('', include('polls.urls')),                  # I let path empty to acces just via IP:PORT
     #path('polls/', include('polls.urls')),           #we include urls.py which is inside polls folder
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]

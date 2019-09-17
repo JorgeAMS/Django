@@ -3,5 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('testit/', views.testit, name='testit'),
+    path('testit/', views.testit, name='testit'),           #I added IP:PORT/testit/ to access to testit pae defined in views.py
+    path('<int:question_id>/', views.detail, name='detail'),
+    path('<int:question_id>/results/', views.results, name='results'),
+    path('<int:question_id>/vote/', views.vote, name='vote'),
 ]
