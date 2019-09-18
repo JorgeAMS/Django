@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,20 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/datail.css' %}">
 </head>
 <body>
     <h1>{{ question.question_text }}</h1>
-    
-    {% for choice in question.choice_set.all %}
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                <input type="checkbox"></input>
+    <br>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">    
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                </div>
             </div>
+            <label for="choice{{ forloop.counter }}" class="form-control col-md-2">{{ choice.choice_text }}</label><br>
         </div>
-        <input type="text" class="form-control col-md-1" disabled value="{{ choice.choice_text }}">
-    </div>
-    {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Vote" class="btn btn-outline-secondary">
+    </form>
     
 </body>
 </html>
