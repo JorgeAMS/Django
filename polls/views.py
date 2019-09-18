@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
 from .models import Choice, Question
+from django.db.models import F
 
 def index( request ):
     latest_question_list = Question.objects.order_by('-pub_date')               # [:N] can be added in order to show last N questions added
@@ -37,7 +38,7 @@ def vote (request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
+        selected_choice.votes = F('votes')+1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
