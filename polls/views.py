@@ -5,6 +5,8 @@ from .models import Question
 
 def index( request ):
     latest_question_list = Question.objects.order_by('-pub_date')               # [:N] can be added in order to show last N questions added
+                                                                                # setting -pub_date brings from the last to the first
+                                                                                # setting pub_date brings from the first to the last
     context = {
         'latest_question_list': latest_question_list,
     }
