@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <h1>{{ question.question_text }}</h1>
-    <ul>
+    
     {% for choice in question.choice_set.all %}
-        <input type="checkbox">{{ choice.choice_text }} <br></input>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <input type="checkbox"></input>
+            </div>
+        </div>
+        <input type="text" class="form-control col-md-1" disabled value="{{ choice.choice_text }}">
+    </div>
     {% endfor %}
-    </ul>
+    
 </body>
 </html>
 

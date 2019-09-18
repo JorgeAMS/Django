@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+app_name='polls'
 urlpatterns = [
     path('', views.index, name='index'),
     path('testit/', views.testit, name='testit'),           #I added IP:PORT/testit/ to access to testit pae defined in views.py
